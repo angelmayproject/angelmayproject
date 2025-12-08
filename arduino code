@@ -1,0 +1,48 @@
+const int GSR=A0;
+const int GSR1=A1;
+const int GSR2=A2;
+int sensorValue=0;
+int sensorValue1=1;
+int sensorValue2=2;
+int gsr_average=0;
+int gsr_average1=1;
+int gsr_average2=2;
+void setup(){
+  Serial.begin(9600);
+}
+
+void loop(){
+  long sum=0;
+  for(int i=0;i<10;i++)           //Average the 10 measurements to remove the glitch
+      {
+      sensorValue=analogRead(GSR);
+      sum += sensorValue;
+      delay(5);
+      }
+   gsr_average = sum/10;
+
+  long sum1=1;
+  for(int i=0;i<10;i++)           //Average the 10 measurements to remove the glitch
+      {
+      sensorValue1=analogRead(GSR1);
+      sum1 += sensorValue1;
+      delay(5);
+      }
+   gsr_average1 = sum1/10;
+
+     long sum2=2;
+  for(int i=0;i<10;i++)           //Average the 10 measurements to remove the glitch
+      {
+      sensorValue2=analogRead(GSR2);
+      sum2 += sensorValue2;
+      delay(5);
+      }
+   gsr_average2 = sum2/10;
+
+   Serial.print(gsr_average);
+   Serial.print(',');
+   Serial.print(gsr_average1);
+   Serial.print(',');
+   Serial.println(gsr_average2);
+
+}
